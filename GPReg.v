@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 02/23/2017 06:14:29 PM
+// Create Date: 02/26/2017 02:26:26 PM
 // Design Name: 
-// Module Name: slt
+// Module Name: GPReg
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,12 +20,16 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module slt_1bit(
-    input  RS,
-    input RT,
-    input lti,
-    output lto
+module reg_file(
+    output reg [15:0] A,
+    output reg [15:0] B,  
+    input [15:0] C,      
+    input [3:0] Aaddr,
+    input [3:0] Baddr,
+    input [3:0] Caddr,
+    input Load,
+    input clear,
+    input clk
     );
-    
-    assign lto = (RT & ~RS) | (~(RS ^ RT) & lti);
+    //this register will stores values for ALU operation
 endmodule

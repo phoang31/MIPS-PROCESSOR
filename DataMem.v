@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 02/23/2017 06:14:29 PM
+// Create Date: 02/26/2017 02:35:17 PM
 // Design Name: 
-// Module Name: slt
+// Module Name: DataMem
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,12 +20,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module slt_1bit(
-    input  RS,
-    input RT,
-    input lti,
-    output lto
+module DataMem(
+    input [15:0] Addr,
+    input [15:0] DI,
+    output [15:0] DO
     );
-    
-    assign lto = (RT & ~RS) | (~(RS ^ RT) & lti);
 endmodule
