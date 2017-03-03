@@ -27,5 +27,5 @@ module Mux_2x1(
     output [15:0] O
     );
     
-    assign O = (S == 1'b0) ? D0 : d1;
+    assign O = (S == 1'b0) ? D1 : D2;
 endmodule
