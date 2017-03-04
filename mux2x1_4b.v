@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 02/23/2017 06:00:16 PM
+// Create Date: 03/03/2017 05:25:37 PM
 // Design Name: 
-// Module Name: Mux_2x1
+// Module Name: mux2x1_4b
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,12 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Mux_2x1(
-    input S,
-    input [15:0] D1,
-    input [15:0] D2,
-    output [15:0] O
-    );
-    
-    assign O = (S == 1'b0) ? D0 : d1;
+module mux2x1_4b(
+    input s,
+    input [3:0] d0,
+    input [3:0] d1,
+    output [3:0] dout
+    );   
+    assign dout = (s == 1'b0) ? d0 : d1;
 endmodule

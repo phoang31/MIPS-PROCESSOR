@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 02/23/2017 06:00:16 PM
+// Create Date: 03/03/2017 01:54:19 PM
 // Design Name: 
-// Module Name: Mux_2x1
+// Module Name: IF
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,12 +20,17 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Mux_2x1(
-    input S,
-    input [15:0] D1,
-    input [15:0] D2,
-    output [15:0] O
+module IF(
+    input clk,
+    input [3:0] pcadd4,
+    input [15:0] inst,
+    output reg [3:0] newpc,
+    output reg [15:0] instout
     );
+    always@(posedge clk) begin
+        newpc <= pcadd4;
+        instout <= inst;      
+    end 
     
-    assign O = (S == 1'b0) ? D0 : d1;
+    
 endmodule

@@ -22,9 +22,9 @@
 
 module SignExtend(
     input [3:0] CONST_I,
-    output [15:0] CONST_O
+    output [5:0] CONST_O
     );
 
-assign CONST_IN = {{12{CONST_I[3]}}, CONST_I};
+assign CONST_IN = {{2{CONST_I[3]}}, CONST_I};
  
 endmodule
