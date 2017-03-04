@@ -21,18 +21,18 @@
 
 
 module DataMem(
-    output reg [15:0] A,       //read data 1
-    input [15:0] C,         //write data
-    input [3:0] Aaddr,      //read address
-    input [3:0] Caddr,    //write address
+    output reg [15:0] A,       //data out
+    input [15:0] C,         //write data in
+    input [15:0] Aaddr,      //read address UPDATED
+ //   input [3:0] Caddr,    //write address
     input load,            //write
     input read,             //read
-    input clear,            //reset
+ //   input clear,            //reset       UPDATED
     input clk               //clock
 );
 //this register will stores values for ALU operation
-reg[15:0] regs[0:15];
-assign A = regs[Aaddr];
+reg[15:0] regs[63:0];        //UPDATED 
+
 
 //assigning initial valies for all registers
     initial begin
@@ -55,28 +55,15 @@ assign A = regs[Aaddr];
     end
 
 always @(posedge clk) begin
-    if(clear) begin
-        regs[0] <= 0;
-        regs[1] <= 0;
-        regs[2] <= 0;
-        regs[3] <= 0;
-        regs[4] <= 0;
-        regs[5] <= 0;
-        regs[6] <= 0;
-        regs[7] <= 0;
-        regs[8] <= 0;
-        regs[9] <= 0;
-        regs[10] <= 0;
-        regs[11] <= 0;
-        regs[12] <= 0;
-        regs[13] <= 0;
-        regs[14] <= 0;
-        regs[15] <= 0;
-                end
-    else begin
-        if(write) begin
-            regs[Caddr] <= C;
-            end
-            end
- end
+        if(load) begin
+            regs[Aaddr] <= C;
+        end
+           
+end
+
+always@(*) begin
+if(read) begin A = regs[Aaddr]; end
+else begin A = 16'bz; end
+end
+
 endmodule
