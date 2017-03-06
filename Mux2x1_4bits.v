@@ -26,5 +26,5 @@ module Mux2x1_4bits(
     input [5:0] d2,
     output [5:0] dout
     );
-    assign dout = (s == 1'b0) ? d0 : d1;
+    assign dout = (s == 1'b0) ? d1 : d2;
 endmodule

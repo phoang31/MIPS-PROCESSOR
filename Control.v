@@ -12,7 +12,11 @@
 // Description: 
 // 
 // Dependencies: 
-// 
+// // ALUop(add) = 000
+// ALUop(and) = 001
+// ALUop(or) =  010
+// ALUop(slt) = 011
+// ALUop(beq), ALUop(sub) = 100
 // Revision:
 // Revision 0.01 - File Created
 // Additional Comments:
@@ -34,124 +38,124 @@ module Control(
     
     initial begin
     
-    alusrc = 0;
-    regwrite = 0;
-    memread = 0;
-    memwrite = 0;
-    memtoreg = 0;
-    regdest = 0;
-    branch = 0;
-    aluop = 0;
+    alusrc = 1'b0;
+    regwrite = 1'b0;
+    memread = 1'b0;
+    memwrite = 1'b0;
+    memtoreg = 1'b0;
+    regdest = 1'b0;
+    branch = 1'b0;
+    aluop = 3'b0;
     
     end
     
     always@(*) begin
         if(op == 4'h2) begin    //2 = add
         
-        alusrc = 0;         //seelct reg read 2
-        regwrite = 1;       //allow writing to reg
-        memread = 0;        //no read from mem
-        memwrite = 0;       //no write to mem
-        memtoreg = 1;       // not writing anything from memory
-        regdest = 0;        //select rd- inst[3:0]
-        branch = 0;         //no branching
-        aluop = 0;          //Austin 
+        alusrc = 1'b0;         //seelct reg read 2
+        regwrite = 1'b1;       //allow writing to reg
+        memread = 1'b0;        //no read from mem
+        memwrite = 1'b0;       //no write to mem
+        memtoreg = 1'b1;       // not writing anything from memory
+        regdest = 1'b0;        //select rd- inst[3:0]
+        branch = 1'b0;         //no branching
+        aluop = 3'b000;          //Austin 
         
         end
         
         else if(op == 4'h6) begin    //6 = subtract
         
-        alusrc = 0;         //seelct reg read 2
-        regwrite = 1;       //allow writing to reg
-        memread = 0;        //no read from mem
-        memwrite = 0;       //no write to mem
-        memtoreg = 1;       // not writing anything from memory
-        regdest = 0;        //select rd- inst[3:0]
-        branch = 0;         //no branching
-        aluop = 0;          //Austin 
+        alusrc = 1'b0;         //seelct reg read 2
+        regwrite = 1'b1;       //allow writing to reg
+        memread = 1'b0;        //no read from mem
+        memwrite = 1'b0;       //no write to mem
+        memtoreg = 1'b1;       // not writing anything from memory
+        regdest = 1'b0;        //select rd- inst[3:0]
+        branch = 1'b0;         //no branching
+        aluop = 3'b100;          //Austin 
         
         end
         else if(op == 4'h0) begin    //0 = and
         
-        alusrc = 0;         //seelct reg read 2
-        regwrite = 1;       //allow writing to reg
-        memread = 0;        //no read from mem
-        memwrite = 0;       //no write to mem
-        memtoreg = 1;       // not writing anything from memory
-        regdest = 0;        //select rd- inst[3:0]
-        branch = 0;         //no branching
-        aluop = 0;          //Austin 
+        alusrc = 1'b0;         //seelct reg read 2
+        regwrite = 1'b1;       //allow writing to reg
+        memread = 1'b0;        //no read from mem
+        memwrite = 1'b0;       //no write to mem
+        memtoreg = 1'b1;       // not writing anything from memory
+        regdest = 1'b0;        //select rd- inst[3:0]
+        branch = 1'b0;         //no branching
+        aluop = 3'b001;          //Austin 
         
         end
         else if(op == 4'h1) begin    //1 = or
         
-        alusrc = 0;         //seelct reg read 2
-        regwrite = 1;       //allow writing to reg
-        memread = 0;        //no read from mem
-        memwrite = 0;       //no write to mem
-        memtoreg = 1;       // not writing anything from memory
-        regdest = 0;        //select rd- inst[3:0]
-        branch = 0;         //no branching
-        aluop = 0;          //Austin 
+        alusrc = 1'b0;         //seelct reg read 2
+        regwrite = 1'b1;       //allow writing to reg
+        memread = 1'b0;        //no read from mem
+        memwrite = 1'b0;       //no write to mem
+        memtoreg = 1'b1;       // not writing anything from memory
+        regdest = 1'b0;        //select rd- inst[3:0]
+        branch = 1'b0;         //no branching
+        aluop = 3'b010;          //Austin 
         
         end
         else if(op == 4'h7) begin    //7 = slt
         
-        alusrc = 0;         //seelct reg read 2
-        regwrite = 1;       //allow writing to reg
-        memread = 0;        //no read from mem
-        memwrite = 0;       //no write to mem
-        memtoreg = 1;       // not writing anything from memory
-        regdest = 0;        //select rd- inst[3:0]
-        branch = 0;         //no branching
-        aluop = 0;          //Austin 
+        alusrc = 1'b0;         //seelct reg read 2
+        regwrite = 1'b1;       //allow writing to reg
+        memread = 1'b0;        //no read from mem
+        memwrite = 1'b0;       //no write to mem
+        memtoreg = 1'b1;       // not writing anything from memory
+        regdest = 1'b0;        //select rd- inst[3:0]
+        branch = 1'b0;         //no branching
+        aluop = 3'b011;          //Austin 
         //need to double check for source of data: write to rd either 1 or 0
         end
         else if(op == 4'h8) begin    //8 = load
         
-        alusrc = 1;         //seelct offset after sign extended
-        regwrite = 1;       //allow writing to reg
-        memread = 1;        //read from mem
-        memwrite = 0;       //no write to mem
-        memtoreg = 0;       //writing data from memory
-        regdest = 1;        //select rt- inst[7:4]
-        branch = 0;         //no branching
-        aluop = 0;          //Austin 
+        alusrc = 1'b1;         //seelct offset after sign extended
+        regwrite = 1'b1;       //allow writing to reg
+        memread = 1'b1;        //read from mem
+        memwrite = 1'b0;       //no write to mem
+        memtoreg = 1'b0;       //writing data from memory
+        regdest = 1'b1;        //select rt- inst[7:4]
+        branch = 1'b0;         //no branching
+        aluop = 3'b000;          //Austin 
         
         end
         else if(op == 4'hA) begin    //A = sw
         
-        alusrc = 1;         //seelct offset after sign extended
-        regwrite = 0;       //not writing to reg
-        memread = 0;        //not reading from mem
-        memwrite = 1;       //need to write to mem
-        memtoreg = 0;       //dont care
-        regdest = 1;        //dont care
-        branch = 0;         //no branching
-        aluop = 0;          //Austin 
+        alusrc = 1'b1;         //seelct offset after sign extended
+        regwrite = 1'b0;       //not writing to reg
+        memread = 1'b0;        //not reading from mem
+        memwrite = 1'b1;       //need to write to mem
+        memtoreg = 1'b0;       //dont care
+        regdest = 1'b1;        //dont care
+        branch = 1'b0;         //no branching
+        aluop = 3'b000;          //Austin 
         
         end
         else if(op == 4'hE) begin    // E = bne
         
-        alusrc = 0;         //select read data 2
-        regwrite = 1;       //not writing to reg
-        memread = 0;        //not reading from mem
-        memwrite = 0;       //no write to mem
-        memtoreg = 0;       //dont care
-        regdest = 1;        //dont care
-        branch = 1;         //branching
-        aluop = 0;          //Austin 
+        alusrc = 1'b0;         //select read data 2
+        regwrite = 1'b1;       //not writing to reg
+        memread = 1'b0;        //not reading from mem
+        memwrite = 1'b0;       //no write to mem
+        memtoreg = 1'b0;       //dont care
+        regdest = 1'b1;        //dont care
+        branch = 1'b1;         //branching
+        aluop = 3'b100;          //Austin 
         
         end
         else begin          //no op
-        alusrc = 0;         //select read data 2
-        regwrite = 0;       //not writing to reg
-        memread = 0;        //not reading from mem
-        memwrite = 0;       //no write to mem
-        memtoreg = 0;       //dont care
-        regdest = 0;        //dont care
-        branch = 0;         //branching
-        aluop = 0;          //Austin        
+        alusrc = 1'b0;         //select read data 2
+        regwrite = 1'b0;       //not writing to reg
+        memread = 1'b0;        //not reading from mem
+        memwrite = 1'b0;       //no write to mem
+        memtoreg = 1'b0;       //dont care
+        regdest = 1'b0;        //dont care
+        branch = 1'b0;         //branching
+        aluop = 3'b000;          //Austin        
         
         end
         

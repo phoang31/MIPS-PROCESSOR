@@ -27,10 +27,11 @@ module PC(
     );          //reg stores values
     
 initial 
+begin
 PCO <= 0;   
-
+end
 always@(posedge CLK)
-
+begin
 PCO <= PCI;
-
+end
 endmodule

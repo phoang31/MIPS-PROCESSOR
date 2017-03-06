@@ -21,39 +21,39 @@
 
 
 module reg_file(
-    output reg [15:0] A,       //read data 1
-    output reg [15:0] B,      //read data 2
+    output [15:0] A,       //read data 1
+    output [15:0] B,      //read data 2
     input [15:0] C,         //write data
     input [3:0] Aaddr,      //read address
     input [3:0] Baddr,      //read address
     input [3:0] Caddr,    //wrtie address
     input Load,            //write
     input clear,            //reset
-    input clk               //clock
+    input clk,              //clock
+    output [15:0] R1,R2,R3
     );
     //this register will stores values for ALU operation
     reg[15:0] regs[0:15];
-    assign A = regs[Aaddr];
-    assign B = regs[Baddr];
+
     
     //assigning initial valies for all registers
     initial begin
-    regs[0] = 9;
-    regs[1] = 8;
-    regs[2] = 7;
-    regs[3] = 6;
-    regs[4] = 5;
-    regs[5] = 4;
+    regs[0] = 0;
+    regs[1] = 2;
+    regs[2] = 5;
+    regs[3] = 0;   //will store the result
+    regs[4] = 1;
+    regs[5] = 1;
     regs[6] = 3;
     regs[7] = 2;
     regs[8] = 1;
-    regs[9] = 10;
-    regs[10] = 12;
-    regs[11] = 13;
-    regs[12] = 14;
-    regs[13] = 15;
-    regs[14] = 16;
-    regs[15] = 20;
+    regs[9] = 2;
+    regs[10] = 4;
+    regs[11] = 2;
+    regs[12] = 5;
+    regs[13] = 5;
+    regs[14] = 6;
+    regs[15] = 3;
     end
     
     always @(posedge clk) begin
@@ -76,9 +76,14 @@ module reg_file(
             regs[15] <= 0;
                     end
         else begin
-            if(write) begin
+            if(Load) begin
                 regs[Caddr] <= C;
                 end
-                end
+        end
      end
+         assign A = regs[Aaddr];
+     assign B = regs[Baddr];
+     assign R1 = regs[1];
+     assign R2 = regs[2];
+     assign R3 = regs[3];
 endmodule

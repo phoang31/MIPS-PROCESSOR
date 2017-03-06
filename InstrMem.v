@@ -22,28 +22,79 @@
 
 module InstrMem(
     input [5:0] PCI,
-    output reg [15:0] OUT
+    output [15:0] OUT
     );
 //what should be put in here? 
 //maybe 5 stages of pipeline?
-    reg[7:0] inst[0:15];
-    assign OUT = inst[PCI];
+    reg[15:0] inst[15:0];
+    assign OUT = inst[PCI[3:0]];
     initial begin
-    //add r0,r1,r2
-    inst[0] = 16'b0010000100100000;
-    //sub r3,r4,r5
-    inst[1] = 4'h6453;
-    //and r6,r7,r8
-    inst[2] = 4'h0786;
-    //or r9,r10,r11
-    inst[3] = 4'h1ab9;
-    //slt r12, r13, r14
-    inst[4] = 4'h7dec;
-    //lw r15,6(r1);
-    inst[5] = 4'h81f6;
-    //sw r2,10(r3)
-    inst[6] = 4'ha32a;
-    //bne r6,r7,-2
-    inst[7] = 4'he76e;
+/*  //add R4,R2,R0
+    inst[0] = 16'h2204;
+    //LOOP: add R3,R3,R1          
+    inst[1] = 16'h2313;
+    //noop
+    inst[2] = 16'hf000;
+    //sub R4,R4,R5
+    inst[3] = 16'h6454;
+    //noop
+    inst[4] = 16'hf000;
+    //noop
+    inst[5] = 16'hf000;
+    //bne R2,R4,LOOP
+    inst[6] = 16'he24a;
+    //noop
+    inst[7] = 16'hf000;
+    //noop
+    inst[8] = 16'hf000;
+    //noop
+    inst[9] = 16'hf000;
+    //noop
+    inst[10] = 16'hf000;
+    
+    inst[11] = 16'hf000;
+    //nop
+    inst[12] = 16'hf000;
+    //noop
+    inst[13] = 16'hf000;
+    //noop
+    inst[14] = 16'hf000;
+    //noop
+    inst[15] = 16'hf000;
+*/
+    //add R4,R2,R1
+    inst[0] = 16'h2213;
+        inst[11] = 16'hf000;
+    //nop
+    inst[1] = 16'hf000;
+    //noop
+    inst[2] = 16'hf000;
+    //noop
+    inst[3] = 16'hf000;
+    //noop
+    inst[4] = 16'hf000;
+        inst[7] = 16'hf000;
+    //noop
+    inst[5] = 16'hf000;
+    //noop
+    inst[6] = 16'hf000;
+    //noop
+    inst[7] = 16'hf000;
+   
+    inst[8] = 16'hf000;
+      //noop
+    inst[9] = 16'hf000;
+      //noop
+    inst[10] = 16'hf000;    
+
+    inst[11] = 16'hf000;
+    //nop
+    inst[12] = 16'hf000;
+    //noop
+    inst[13] = 16'hf000;
+    //noop
+    inst[14] = 16'hf000;
+    //noop
+    inst[15] = 16'hf000;
     end
 endmodule

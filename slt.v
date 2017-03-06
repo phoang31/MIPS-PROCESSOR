@@ -23,9 +23,11 @@
 module slt_1bit(
     input  RS,
     input RT,
-    input lti,
-    output lto
+    input lti, eqi, gti,
+    output lto, eqo, gto
     );
     
     assign lto = (RT & ~RS) | (~(RS ^ RT) & lti);
+    assign eqo = eqi & ((RS & RT) | (~RS & ~RT));
+    assign gto = (RS & ~RT) | (~(RS^RT) & gti );
 endmodule

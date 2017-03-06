@@ -21,14 +21,15 @@
 
 
 module WB(
+    input clk,
     input regwrite, memtoreg,
     input [15:0] memdata,
     input [15:0] aluresult,
-    input [15:0] regdst,
+    input [3:0] regdst,
     output reg regwriteout, memtoregout,
     output reg [15:0] memdataout,
     output reg [15:0] aluresultout,
-    output reg [15:0] regdstout
+    output reg [3:0] regdstout
     );
     
     always@(posedge clk) begin
