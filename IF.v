@@ -22,9 +22,9 @@
 
 module IF(
     input clk,
-    input [3:0] pcadd4,
+    input [5:0] pcadd4,
     input [15:0] inst,
-    output reg [3:0] newpc,
+    output reg [5:0] newpc,
     output reg [15:0] instout
     );
     always@(posedge clk) begin

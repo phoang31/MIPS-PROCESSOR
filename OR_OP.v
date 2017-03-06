@@ -22,8 +22,8 @@
 
 module OR_OP(
     output [15:0] O,
-    input [15:0] Rs,
-    input [15:0] Rt
+    input [15:0] RS,
+    input [15:0] RT
     );
     
     or(O[0], RS[0], RT[0]);
